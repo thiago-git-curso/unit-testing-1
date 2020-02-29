@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,14 +27,14 @@ public class MyApplicationMockedTest {
     public void processMessage_sendMessageNoMsg_false() {
         Message dummy = new Message();
         when(service.sendMessage(null, null)).thenReturn(false);
-        Assertions.assertTrue(application.processMessage(dummy));
+        Assertions.assertFalse(application.processMessage(dummy));
     }
 
     @Test
     public void processMessage_sendMessageWithMsg_true() {
         Message dummy = new Message("Hello World", "tfss@cesar.school");
 
-        when(service.sendMessage(null, null)).thenReturn(true);
+        when(service.sendMessage(anyString(),anyString())).thenReturn(true);
         Assertions.assertTrue(application.processMessage(dummy));
     }
 
